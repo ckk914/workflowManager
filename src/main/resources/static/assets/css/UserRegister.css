@@ -1,0 +1,182 @@
+body {
+    font-family: 'NEXON Lv1 Gothic OTF', 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.container.wrap {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    width: 100%;
+    max-width: 500px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile .thumbnail-box {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+.profile .thumbnail-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+table {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.form-group label i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.signUpInputStyle,
+.signUpInputStyle2,
+.btn-join {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.signUpInputStyle,
+.signUpInputStyle2 {
+    width: 500px;
+    max-width: 100%;
+}
+
+.signUpInputStyle::placeholder,
+.signUpInputStyle2::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.signUpInputStyle:focus,
+.signUpInputStyle2:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-join {
+    background-color: #4e54c8;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-join:hover {
+    background-color: #3f45a0;
+}
+
+.fas {
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+strong {
+    display: inline;
+    font-size: 16px;
+}
+
+span {
+    font-size: 14px;
+    color: #ffd700;
+    display: block;
+    margin-top: 5px;
+}
+
+#profile-label {
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+#profile-label:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+select.signUpInputStyle2 {
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 15px center;
+	padding-right: 40px;
+	color: #333333; /* 텍스트 색상을 어두운 회색으로 변경 */
+}
+
+/* 옵션 텍스트의 색상도 변경 */
+select.signUpInputStyle2 option {
+	color: #333333;
+	background-color: #ffffff;
+}
+
+#profile-img {
+    display: none;
+}

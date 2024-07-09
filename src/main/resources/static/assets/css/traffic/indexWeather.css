@@ -1,0 +1,15 @@
+#index-weather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  z-index: 1000;
+  font-size: 15px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; /* 전체 너비 */
+  padding: 10px; /* 패딩 추가 */
+}

@@ -1,0 +1,195 @@
+body {
+    font-family: 'NEXON Lv1 Gothic OTF', 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #000428, #8e33be, #007551);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.login-container {
+    width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    color: white;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#login-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3c3ca4;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 30px;
+    transition: background-color 0.5s ease;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+.forgot-password {
+    margin-top: 20px;
+}
+
+#auto-login {
+    color: white;
+}
+
+.forgot-password a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.5s ease;
+    font-weight: normal;
+}
+
+.forgot-password a:hover {
+    /* color: white; */
+    color: #a699c8;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Add this to create a starry effect */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 40px);
+    background-size: 650px 650px, 450px 450px, 350px 350px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    animation: stars 15s ease infinite;
+}
+
+@keyframes stars {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 별 효과 수정 */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.stars::before,
+.stars::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image:
+        radial-gradient(2px 2px at 40px 60px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 80px 120px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 120px 180px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 160px 240px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 200px 300px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 240px 360px, #ffffff, rgba(0, 0, 0, 0));
+    background-size: 400px 400px;
+    background-repeat: repeat;
+    animation: twinkle 100s linear infinite;
+    opacity: 0.5;
+}
+
+.stars::after {
+    background-size: 600px 600px;
+    animation-delay: -50s;
+}
+
+@keyframes twinkle {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-50%);
+    }
+}
+
+.join-button-container a {
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+}
+.join-button-container a:hover {
+    color: #a699c8;
+    text-decoration: underline;
+    font-weight: bold;
+}

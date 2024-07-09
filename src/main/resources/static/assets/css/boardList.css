@@ -1,0 +1,259 @@
+@import url("https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css");
+
+/* 중앙 정렬을 위한 컨테이너 스타일 */
+body {
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f2efeb;
+}
+
+.board-main-content {
+  margin-top: 130px; /* 헤더 높이만큼 마진 추가 */
+}
+
+.board-link {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+.board-link:visited,
+.board-link:active {
+  color: black;
+}
+
+.board-list {
+  margin-left: 200px;
+  margin-bottom: 20px;
+}
+
+.container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  margin: 0 auto; /* 수평 중앙 정렬 */
+  position: relative; /* 상대 위치 설정 */
+}
+
+.search-bar {
+  display: flex;
+  justify-content: flex-start;
+  width: 80%; /* 너비를 최대화 */
+  margin-left: 0; /* 왼쪽 끝으로 밀기 */
+}
+
+.board-table {
+  margin-top: 20px;
+}
+
+.search-input {
+  width: 80%;
+  padding-left: 15px;
+  background-color: #f2efeb;
+  font-size: 32px; /* 글자 크기 설정 */
+  border: none; /* 기본 보더 제거 */
+  border-bottom: 1px solid #000000; /* 아래 보더라인 설정 */
+  outline: none; /* 포커스 시 아웃라인 제거 */
+  transition: border-color 0.3s ease; /* 보더 색상 전환 효과 */
+}
+
+.search-input::placeholder {
+  color: #c7c6c6;
+}
+
+.search-input:focus {
+  border-bottom: 1px solid #7b317c;
+}
+
+.search-type {
+  width: 12%; /* 원하는 너비로 설정 */
+  margin-right: 2%;
+  border-bottom: 1px solid #000000; /* 아래 보더라인 설정 */
+  padding: 10px 0; /* 패딩 설정 */
+  font-size: 16px; /* 글자 크기 설정 */
+  border: none; /* 기본 보더 제거 */
+  outline: none; /* 포커스 시 아웃라인 제거 */
+  background: none; /* 기본 배경 제거 */
+  transition: border-color 0.3s ease; /* 보더 색상 전환 효과 */
+  cursor: pointer; /* 커서 스타일 변경 */
+}
+
+.search-type option {
+  color: black; /* 옵션 텍스트 색상 설정 */
+}
+
+.search-btn {
+  background-color: none;
+  border: none;
+  margin-left: 2%;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-btn i {
+  font-size: 32px;
+  color: black;
+}
+
+.new-board {
+  align-self: flex-end; /* 부모 컨테이너의 오른쪽 끝으로 정렬 */
+  margin-top: 20px; /* 버튼과 검색창 사이의 간격 */
+  margin-right: 50px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #3e489f;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* .new-board:hover {
+  background-color: rgb(0, 68, 140);
+} */
+
+.nickname {
+  color: #973554;
+  font-weight: bolder;
+  margin: 20px 0;
+}
+
+table {
+  width: 100%;
+  margin: 20px 0;
+  border-collapse: collapse;
+}
+
+.one-board {
+  border-bottom: 1.2px solid #d2d2d2;
+  height: 80px;
+}
+
+.board-info {
+  width: 60%;
+  padding: 24px 30px;
+  height: 80px;
+  box-sizing: border-box;
+}
+
+.created-at {
+  float: right;
+  text-align: right;
+  align-content: end;
+  padding-top: 4px;
+}
+
+/* 이미지 박스 스타일 */
+.board-image {
+  width: 14%;
+  position: relative;
+  overflow: hidden; /* 이미지가 박스를 넘지 않도록 */
+}
+
+.board-image > img {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: fill;
+}
+
+.board-image::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 70px;
+  height: 120px;
+  width: 1.1px;
+  background-color: #d2d2d2;
+}
+
+i {
+  font-size: 12px;
+  color: #9c9d9f;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.view,
+.likes,
+.dislikes,
+.created-at,
+.reply-count {
+  color: #9c9d9f;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.nickname .fa-user-secret {
+  font-size: 20px;
+  color: black;
+}
+
+form {
+  margin-bottom: 40px;
+}
+
+.bottom-section {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 페이지네이션 컨테이너 */
+.pagination {
+  margin: 80px 0;
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  padding: 0;
+  list-style: none;
+}
+
+/* 페이지네이션 아이템 */
+.pagination li {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 0;
+  background-color: transparent;
+}
+
+/* 페이지네이션 링크 */
+.pagination li a {
+  color: #000; /* 기본 텍스트 색상 */
+  text-decoration: none; /* 기본적으로 밑줄 없음 */
+  padding: 0; /* 패딩 제거 */
+  border: none; /* 테두리 제거 */
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+/* 현재 페이지 링크 스타일 */
+.pagination li a.active {
+  text-decoration: underline; /* 호버 시 밑줄 추가 */
+  color: #7b317c; /* 호버 시 텍스트 색상 변경 */
+}
+
+/* 호버 상태 */
+.pagination li a:hover {
+  text-decoration: underline; /* 호버 시 밑줄 추가 */
+  color: #7b317c; /* 호버 시 텍스트 색상 변경 */
+}

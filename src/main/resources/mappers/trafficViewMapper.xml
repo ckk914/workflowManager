@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workflowManager.mapper.traffic.trafficViewMapper">
+    <select id="favoriteFindStation" resultType="com.workflowManager.dto.traffic.response.StationViewResponseDto">
+        SELECT departure , arrival , view_count
+        FROM station_views
+        WHERE user_id = #{userId}
+        ORDER BY view_count DESC
+        LIMIT 5
+    </select>
+
+    <insert id="saveFavoriteStation">
+        INSERT INTO station_views
+        (user_id , arrival, departure, view_count)
+        VALUES
+        (#{userId}, #{arrival}, #{departure}, #{viewCount})
+    </insert>
+
+    <insert id="station_views" >
+        INSERT INTO traffic
+        (traffic_id , arrival, departure, arrival, view_count)
+        VALUES
+        (#{trafficId}, #{userId}, #{departure}, #{arrival}, #{viewCount})
+    </insert>
+
+        <select id="findOne" resultType="com.workflowManager.dto.traffic.response.StationViewResponseDto">
+            SELECT user_id, arrival, departure, view_count
+            FROM station_views
+            WHERE user_id = #{userId}
+        </select>
+
+        <update id="updateViewCounts" parameterType="com.workflowManager.dto.traffic.response.StationViewResponseDto">
+            UPDATE station_views
+            SET view_count = #{viewCount}
+            WHERE user_id = #{userId} AND arrival = #{arrival} AND departure = #{departure}
+        </update>
+
+</mapper>
+
+

@@ -1,0 +1,99 @@
+/* styles.css */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    /* 기존 테이블과 모달 사이 여백 */
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.button-container {
+    text-align: center;
+    /* 버튼 가운데 정렬 */
+    margin-bottom: 20px;
+    /* 새 글쓰기 버튼 아래 여백 */
+}
+
+.button {
+    display: inline-block;
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.table-container {
+    display: inline-block;
+    width: 65%;
+    /* 테이블의 너비 조정 */
+    vertical-align: top;
+    /* 왼쪽 정렬 및 위 정렬 */
+}
+
+.form-container {
+    display: inline-block;
+    width: 30%;
+    /* 입력 폼의 너비 조정 */
+    margin-left: 20px;
+    /* 왼쪽 여백 추가 */
+    vertical-align: top;
+    /* 오른쪽 정렬 및 위 정렬 */
+}
+
+.modal {
+    display: none;
+    /* 초기에는 숨김 */
+    position: fixed;
+    /* 고정 위치 */
+    z-index: 1;
+    /* 다른 요소 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* 스크롤 가능 */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* 반투명 배경 */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 중앙에 위치, 상단 여백 조정 */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+    /* 모달 너비 조정 */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

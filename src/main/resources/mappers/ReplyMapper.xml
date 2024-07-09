@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workflowManager.mapper.boardmapper.ReplyMapper">
+
+    <insert id="save">
+        INSERT INTO reply
+            (reply_content, nickName, board_id, reply_password, user_id)
+        VALUES
+            (#{replyContent}, #{nickName}, #{boardId}, #{replyPassword},
+            #{userId})
+    </insert>
+
+    <select id="replies" resultType="reply">
+        SELECT
+            reply_id,
+            user_id,
+            nickName,
+            reply_content,
+            reply_created_at,
+            reply_updated_at
+        FROM reply
+        WHERE board_id = #{boardId}
+        ORDER BY reply_created_at
+        LIMIT #{p.pageStart}, #{p.amount}
+    </select>
+
+    <update id="update">
+        UPDATE reply
+        SET reply_content = #{replyContent},
+        reply_updated_at = #{replyUpdatedAt}
+        WHERE reply_id = #{replyId}
+    </update>
+
+    <select id="findOne" resultType="reply">
+        select
+            board_id,
+            reply_password
+        FROM reply
+        WHERE reply_id = #{replyId}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM reply
+        WHERE reply_id = #{replyId}
+    </delete>
+
+    <select id="countReply" resultType="int">
+        SELECT COUNT(*)
+        FROM reply
+        WHERE board_Id = #{boardId}
+    </select>
+
+    <!--대댓글-->
+
+    <insert id="saveSubReply">
+        INSERT INTO SubReply
+        (sub_reply_content, nickName, reply_id, sub_reply_password, user_id)
+        VALUES
+        (#{subReplyContent}, #{nickName}, #{replyId}, #{subReplyPassword}, #{userId})
+    </insert>
+
+    <select id="subReplies" resultType="subReply">
+        SELECT
+        sub_reply_id,
+        user_id,
+        reply_id,
+        nickName,
+        sub_reply_content,
+        sub_reply_created_at,
+        sub_reply_updated_at
+        FROM SubReply
+        WHERE reply_id = #{replyId}
+        ORDER BY sub_reply_created_at
+    </select>
+
+    <update id="updateSubReply">
+        UPDATE SubReply
+        SET sub_reply_content = #{subReplyContent},
+        sub_reply_updated_at = #{subReplyUpdatedAt}
+        WHERE sub_reply_id = #{subReplyId}
+    </update>
+
+    <select id="findOneSubReply" resultType="subReply">
+        select
+        reply_id,
+        sub_reply_password
+        FROM SubReply
+        WHERE sub_reply_id = #{subReplyId}
+    </select>
+
+    <delete id="deleteSubReply">
+        DELETE FROM SubReply
+        WHERE sub_reply_id = #{subReplyId}
+    </delete>
+
+</mapper>

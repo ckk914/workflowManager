@@ -1,0 +1,338 @@
+body {
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f2efeb;
+}
+
+.board-detail-content {
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  padding-top: 100px;
+  margin: 0 auto; /* 컨텐츠 중앙 정렬 */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f2efeb;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.board-title {
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.meta {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 40px;
+}
+
+.board-content {
+  border-top: 1px solid #cccccc;
+  padding: 20px 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.one-board-detail {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
+}
+
+.actions a {
+  margin-right: 10px;
+  color: #3e489f;
+  text-decoration: none;
+}
+
+.actions a:hover {
+  text-decoration: underline;
+}
+
+#replyContainer {
+  margin-top: 60px;
+  border-radius: 10px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  */
+  /* 약간의 그림자 효과 추가, 필요에 따라 제거 가능 */
+}
+
+.reply-title {
+  font-size: 22px;
+}
+
+.replies {
+  margin-top: 40px;
+}
+
+.replies h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.fa-comment {
+  font-size: 32px;
+}
+
+.reply {
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+
+.reply .meta {
+  font-size: 16px;
+  color: #555;
+}
+
+.reply .content {
+  font-size: 18px;
+  padding: 0px 5px;
+  margin-bottom: 10px;
+}
+
+.reply-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #181a33;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f2efeb;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.reply-form h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.reply-form input,
+.reply-form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 10px;
+  resize: vertical;
+}
+
+.reply-form button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #3e489f;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+/* .reply-form button:hover {
+  background-color: #3e489f;
+} */
+
+.replyModify {
+  font-size: 0.9em;
+  background: white;
+  cursor: pointer;
+}
+
+.replyDelete {
+  font-size: 0.9em;
+  background: white;
+  cursor: pointer;
+}
+
+.subReply {
+  background: white;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.reply .button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding-right: 10px;
+  padding-top: 15px;
+}
+
+.reply .sub-reply .sub-button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+  padding-right: 10px;
+  padding-bottom: 15px;
+}
+
+/* 좋아요/싫어요 버튼 스타일 */
+.like-dislike-buttons {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.like-dislike-buttons span {
+  font-size: 20px;
+  color: #141640;
+}
+
+.like-button,
+.dislike-button {
+  font-size: 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.fa-thumbs-up {
+  color: #141640;
+  margin-right: 3px;
+  font-size: 24px;
+}
+
+.fa-thumbs-down {
+  color: #141640;
+  margin-right: 3px;
+  font-size: 24px;
+}
+
+.like-button:hover {
+  background-color: #973554;
+}
+
+.dislike-button:hover {
+  background-color: #3e489f;
+}
+
+/* subRepliesContainer 스타일 추가 */
+#subRepliesContainer {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.sub-reply {
+  margin-bottom: 5px;
+  padding-top: 12px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 8px -2px rgba(0, 0, 0, 0.1);
+}
+
+.fa-level-up-alt {
+  transform: rotate(90deg);
+  margin-right: 2px;
+}
+
+.sub-reply .meta {
+  font-size: 0.9em;
+  padding-left: 10px;
+  color: #777;
+  margin-bottom: 40px;
+}
+
+.subReply-form {
+  width: 100%;
+}
+
+.sub-reply .content {
+  margin-bottom: 10px;
+  padding: 0 30px;
+}
+
+.sub-reply .sub-button-group {
+  display: flex;
+}
+
+.sub-reply .sub-button-group button {
+  font-size: 0.8em;
+  padding: 3px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.sub-reply .sub-button-group .subReplyModify {
+  background: white;
+}
+
+.sub-reply .sub-button-group .subReplyDelete {
+  background: white;
+}
+
+.author {
+  color: #df1757;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.pagination-container {
+  margin-top: 50px;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+  margin: 20px 0;
+  font-size: 20px;
+}
+
+.page-item{
+  text-decoration: none;
+  color: inherit;
+  margin: 0 5px;
+}
+
+.page-link {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: black;
+  background-color: #f2efeb;
+  border: none; /* 테두리를 제거 */
+  transition: color 0.3s;
+}
+
+.page-link:hover {
+  text-decoration: underline; /* 호버 시 밑줄 추가 */
+  color: #7b317c; /* 호버 시 텍스트 색상 변경 */
+}
+
+.p-active .page-link {
+  text-decoration: underline; /* 호버 시 밑줄 추가 */
+  color: #7b317c; /* 호버 시 텍스트 색상 변경 */
+}
+
+.page-active {
+  font-weight: bold;
+}
+
+

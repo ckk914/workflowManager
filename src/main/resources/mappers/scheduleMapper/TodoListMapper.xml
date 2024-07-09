@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workflowManager.mapper.scheduleMapper.TodoListMapper">
+
+
+<!--    ==================개인 투두리스트 resultMap=========================-->
+
+
+    <resultMap id="TodoListResultMap" type="AllMyTodoListDto">
+        <id property="todoId" column="todo_id"/>
+        <result property="todoContent" column="todo_content"/>
+        <result property="todoStatus" column="todo_status"/>
+        <result property="todoCreateAt" column="todo_createAt"/>
+        <result property="todoUpdateAt" column="todo_updateAt"/>
+        <result property="colorIndexId" column="color_index_id"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
+
+
+    <!--=================== 개인  투두리스트 ===================== -->
+
+
+<!--    개인 투두리스트 모두 조회-->
+    <select id="findAll" resultType="todoList">
+        SELECT * FROM TodoList
+    </select>
+
+<!--    개인 특정 투두리스트 찾기-->
+    <select id="findByTodoId" parameterType="int" resultType="todoList">
+        SELECT * FROM TodoList WHERE todo_id = #{todoId}
+    </select>
+
+<!--    개인 투두리스트 목록 정렬하여 조회-->
+    <select id="findByUserId" parameterType="String" resultType="todoList">
+        SELECT * FROM TodoList WHERE user_id = #{userId}
+        ORDER BY
+            todo_status DESC,
+            todo_createAt ASC;
+    </select>
+
+<!--    개인 투두리스트 저장 -->
+    <insert id="insertPersonalTodo" parameterType="todoList">
+        INSERT INTO TodoList (
+                              todo_content,
+                              todo_status,
+                              todo_createAt,
+                              todo_updateAt,
+                              color_index_id,
+                              user_id
+        )
+        VALUES (
+                #{todoContent},
+                #{todoStatus},
+                #{todoCreateAt},
+                #{todoUpdateAt},
+                #{colorIndexId},
+                #{userId}
+               )
+    </insert>
+
+<!--    개인 투두리스트 업데이트 -->
+    <update id="updatePersonalTodo" parameterType="todoList">
+    UPDATE TodoList
+    SET todo_content = #{todoContent},
+        todo_status = #{todoStatus},
+        todo_updateAt = #{todoUpdateAt}
+    WHERE todo_id = #{todoId}
+</update>
+
+<!--    개인 투두리스트 삭제 -->
+    <delete id="deletePersonalTodo" parameterType="int">
+        DELETE FROM TodoList WHERE todo_id = #{todoId}
+    </delete>
+
+
+<!--=================== 팀 투두리스트 ========================-->
+
+
+<!--    모든 팀 모든 투두리스트 목록 조회 -->
+    <select id="findAllTeamTodos" resultType="teamTodoList">
+        SELECT * FROM TeamTodoList
+    </select>
+
+<!--    특정 팀 투두리스트 하나 조회 -->
+    <select id="findTeamTodoById" parameterType="int" resultType="teamTodoList">
+        SELECT * FROM TeamTodoList WHERE team_todo_id = #{teamTodoId}
+    </select>
+
+<!--    팀 투두리스트 목록 팀 아이디로 조회 -->
+    <select id="findTeamTodosByDepartmentId" parameterType="String" resultType="teamTodoList">
+        SELECT * FROM TeamTodoList WHERE department_id = #{departmentId}
+        ORDER BY
+            team_todo_status DESC,
+            team_todo_createAt ASC;
+    </select>
+
+<!--    팀 투두리스트 저장-->
+    <insert id="insertTeamTodo" parameterType="com.workflowManager.entity.schedule.TeamTodoList">
+        INSERT INTO TeamTodoList (
+            team_todo_content,
+            team_todo_status,
+            team_todo_createAt,
+            team_todo_updateAt,
+            color_index_id,
+            user_id,
+            department_id
+        )
+        VALUES (
+                   #{teamTodoContent},
+                   #{teamTodoStatus},
+                   #{teamTodoCreateAt},
+                   #{teamTodoUpdateAt},
+                   #{colorIndexId},
+                   #{userId},
+                   #{departmentId}
+               )
+    </insert>
+
+
+    <!--    팀 투두리스트 업데이트 -->
+    <update id="updateTeamTodo" parameterType="teamTodoList">
+        UPDATE TeamTodoList
+        SET team_todo_content = #{teamTodoContent},
+            team_todo_status = #{teamTodoStatus},
+            team_todo_createAt = #{teamTodoCreateAt},
+            team_todo_updateAt = #{teamTodoUpdateAt},
+            color_index_id = #{colorIndexId}
+        WHERE team_todo_id = #{teamTodoId}
+    </update>
+
+<!--    팀 투두리스트 삭제 -->
+    <delete id="deleteTeamTodo" parameterType="int">
+        DELETE FROM TeamTodoList WHERE team_todo_id = #{teamTodoId}
+    </delete>
+
+</mapper>

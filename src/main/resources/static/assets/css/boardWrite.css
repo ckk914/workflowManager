@@ -1,0 +1,102 @@
+@import url("https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css");
+
+/* 기본 스타일 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body 스타일 */
+body {
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f2efeb;
+}
+
+/* 게시물 작성 컨테이너 */
+.board-write-content {
+  margin-top: 60px;
+  background: #fff;
+  padding: 40px 60px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 60%;
+}
+
+.board-write-content h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.board-write-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.board-write-content td {
+  padding: 10px 0;
+  vertical-align: top;
+}
+
+.board-write-content input[type="text"],
+.board-write-content input[type="password"],
+.board-write-content textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* title 인풋 한 줄로 만들기 */
+.board-write-content input[name="boardTitle"] {
+  width: 100%;
+}
+
+/* nickname과 password 인풋 한 줄 반씩 차지하기 */
+.board-write-content input[name="boardNickname"],
+.board-write-content input[name="boardPassword"] {
+  width: calc(49%);
+}
+
+.board-write-content input[name="boardNickname"] {
+  margin-right: 1%;
+}
+
+.board-write-content input[type="submit"] {
+  display: block;
+  width: 40%; /* 원하는 비율로 변경 */
+  padding: 10px;
+  background-color: #3e489f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0 auto; /* 버튼을 가운데 정렬 */
+}
+
+.board-write-content input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.board-write-content a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.board-write-content a:hover {
+  text-decoration: underline;
+  color: #3e489f;
+}

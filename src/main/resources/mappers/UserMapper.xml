@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workflowManager.mapper.userMapper.UserMapper">
+    <insert id="save">
+        Insert into users
+        (user_id, employee_id, user_position, password, user_name,
+        user_email, user_access_level,profile_img,user_created_at,department_id)
+        Values
+        (#{userId},#{employeeId},#{userPosition},#{password},#{userName},
+        #{userEmail},"USER",#{profileImg},#{userCreatedAt},#{departmentId})
+    </insert>
+    <select id="findDepartmentAll" resultType="com.workflowManager.dto.DepartmentNameDto">
+        SELECT * FROM Department;
+    </select>
+
+<!--
+-->
+    <select id="findOne" resultType="user">
+        SELECT
+        u.user_id
+        ,u.employee_id
+        , u.password
+        , u.user_name
+        ,u.user_position
+        ,u.user_email
+        ,u.user_created_at
+        , u.user_access_level
+        , u.department_id
+        , u.profile_img,
+        u.session_id,
+        u.limit_time,
+        d.department_name
+        FROM Users u
+        inner join Department d on u.department_id=d.department_id
+        WHERE u.user_id = #{userId}
+    </select>
+
+    <select id="existsById" resultType="boolean">
+        SELECT
+        COUNT(*)
+        FROM Users
+        <if test="type == 'account'"> WHERE user_id = #{keyword}</if>
+        <if test="type == 'email'"> WHERE user_email = #{keyword}</if>
+        <if test="type == 'employee_id'"> WHERE employee_id = #{keyword}</if>
+
+    </select>
+
+    <update id ="updateAutoLogin">
+        UPDATE Users
+        SET session_id = #{sessionId}, LIMIT_TIME = #{limitTime}
+        WHERE user_id = #{userId}
+    </update>
+
+    <select id="findMemberBySessionId" resultType="user">
+        SELECT
+        user_id, user_NAME, user_EMAIL, User_Access_level, LIMIT_TIME, profile_img, department_id
+        FROM Users
+        WHERE SESSION_ID = #{sessionId}
+    </select>
+
+<!--    윤종 매퍼 쿼리 추가-->
+<!--    부서이름 부서 아이디로 찾기-->
+    <select id="findOneDepartmentName" resultType="string">
+        SELECT
+        department_name
+        FROM
+        Department
+        WHERE department_id = #{departmentId};
+    </select>
+
+<!-- 비밀번호 수정   -->
+    <update id ="UserSetPassword">
+        UPDATE Users SET password = #{password} WHERE user_id = #{userId};
+
+    </update>
+</mapper>

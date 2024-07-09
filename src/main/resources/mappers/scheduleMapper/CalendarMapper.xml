@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workflowManager.mapper.scheduleMapper.CalendarMapper">
+
+    <!--    회원가입 시 아이디 부여 및 공용 메서드 =================================================-->
+
+    <!-- 개인 캘린더 및 팀 캘린더 일정을 이벤트 id로 삭제 -->
+    <delete id="deleteCalendarEvent">
+        DELETE FROM CalendarEvent
+        WHERE cal_event_id = #{calEventId};
+    </delete>
+
+    <!-- 개인 캘린더 존재 여부 확인 -->
+    <select id="countPersonalCalendar" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM Calendar
+        WHERE user_id = #{userId};
+    </select>
+
+    <!-- 부서에 따른 팀 캘린더 조회 -->
+    <select id="getTeamCalendarByDepartmentId" parameterType="string" resultType="teamCalendar">
+        SELECT team_calendar_id, team_calendar_name
+        FROM TeamCalendar
+        WHERE department_id = #{departmentId};
+    </select>
+
+    <!-- 팀 캘린더 아이디 부여 유무 : 업데이트 예정 -->
+<!--    <select id="countUserTeamCalendar" parameterType="map" resultType="int">-->
+<!--        SELECT COUNT(*)-->
+<!--        FROM UserTeamCalendar-->
+<!--        WHERE user_id = #{userId} &lt;!&ndash; team_calendar_id 없을경우 부여로 넘어감&ndash;&gt;-->
+<!--    </select>-->
+
+    <!-- 사용자와 팀 캘린더 아이디 부여 및 연결 : 중간테이블 생성 필요 -->
+    <insert id="insertUserTeamCalendar" parameterType="map">
+        INSERT INTO UserTeamCalendar (user_id, team_calendar_id)
+        VALUES (#{userId}, #{teamCalendarId});
+    </insert>
+
+    <!-- 회원가입 후 첫 로그인 시 개인 캘린더 생성 -->
+    <insert id="insertPersonalCalendar" parameterType="map">
+        INSERT INTO Calendar (user_id, calendar_name)
+        VALUES (#{userId}, #{calendarName});
+    </insert>
+
+
+
+    <!--    개인 개별 메서드 =================================================-->
+
+
+<!--달 별 개인일정 조회 -->
+    <select id="getCalendarEventsForPeriod" parameterType="map" resultType="allMyCalendarEventDto">
+        SELECT
+        CE.cal_event_id AS calEventId,
+        CE.cal_event_date AS calEventDate,
+        CE.cal_event_title AS calEventTitle,
+        CE.cal_event_description AS calEventDescription,
+        CE.cal_event_createAt AS calEventCreateAt,
+        CE.cal_event_updateAt AS calEventUpdateAt,
+        CE.color_index_id AS colorIndexId,
+        CE.user_id AS userId,
+        CE.calendar_id AS calendarId,
+        U.user_name AS userName
+        FROM
+        CalendarEvent CE
+        JOIN
+        Users U ON U.user_id = CE.user_id
+        WHERE
+        CE.user_id = #{userId}
+        AND CE.cal_event_date BETWEEN #{startDate} AND #{endDate}
+        AND team_calendar_id IS NULL;
+    </select>
+
+
+    <!-- 본인의 모든 캘린더 (개인달력, 팀달력)조회 -->
+    <select id="getMyAllCalendars" resultType="calendarsDto">
+        SELECT
+        C.calendar_id,
+        C.calendar_name,
+        T.team_calendar_id,
+        T.team_calendar_name,
+        U.user_id,
+        U.user_name
+        FROM TeamCalendar T
+        JOIN Users U ON T.department_id = U.department_id
+        JOIN Calendar C ON U.user_id = C.user_id
+        WHERE U.user_id = #{userId};
+    </select>
+
+    <!-- 개인 캘린더 모든 일정 리스트 조회 -->
+    <select id="getMyAllCalendarEvents" resultType="allMyCalendarEventDto">
+        SELECT CE.cal_event_id,
+        CE.cal_event_date,
+        CE.cal_event_title,
+        CE.cal_event_description,
+        CE.cal_event_createAt,
+        CE.cal_event_updateAt,
+        CE.color_index_id,
+        CE.user_id,
+        CE.calendar_id,
+        U.user_name
+        FROM CalendarEvent CE
+        JOIN Users U ON CE.user_id = U.user_id
+        WHERE CE.user_id = #{userId}
+        AND CE.team_calendar_id IS NULL;
+    </select>
+
+<!--    개인 일정 하나 조회 -->
+    <select id="findOneMyCalEvent" resultType="allMyCalendarEventDto">
+        SELECT CE.cal_event_id,
+        CE.cal_event_date,
+        CE.cal_event_title,
+        CE.cal_event_description,
+        CE.cal_event_createAt,
+        CE.cal_event_updateAt,
+        CE.color_index_id,
+        CE.user_id,
+        CE.calendar_id,
+        U.user_name
+        FROM CalendarEvent CE
+        JOIN Users U ON CE.user_id = U.user_id
+        WHERE CE.cal_event_id = #{calEventId}
+        AND CE.team_calendar_id IS NULL;
+    </select>
+
+    <!-- 본인 캘린더 이벤트 저장 -->
+    <insert id="insertCalendarEvent" parameterType="allMyCalendarEventDto">
+        INSERT INTO CalendarEvent (
+        cal_event_date,
+        cal_event_title,
+        cal_event_description,
+        user_id,
+        calendar_id
+        <if test="colorIndexId != null">
+            ,color_index_id
+        </if>
+        )
+        VALUES (
+        #{calEventDate},
+        #{calEventTitle},
+        #{calEventDescription},
+        #{userId},
+        #{calendarId}
+        <if test="colorIndexId != null">
+            ,#{colorIndexId}
+        </if>
+        );
+    </insert>
+
+    <!--    본인 이벤트 수정 -->
+    <update id="updateMyCalEvent" parameterType="allMyCalendarEventDto">
+        UPDATE CalendarEvent
+        SET
+        cal_event_date = #{calEventDate},
+        cal_event_title = #{calEventTitle},
+        cal_event_description = #{calEventDescription},
+        cal_event_updateAt = #{calEventUpdateAt},
+        user_id = #{userId},
+        color_index_id = #{colorIndexId}
+        WHERE cal_event_id = #{calEventId}
+    </update>
+
+
+    <!--    팀 개별 메서드 =================================================-->
+
+
+    <!--달 별 팀 공유 일정 조회, 공지사항 있을 경우 추후 추가해서 로직 수정하기  -->
+    <select id="getTeamCalendarEventsForPeriod" parameterType="map" resultType="allMyTeamCalendarEventDto">
+        SELECT
+        CE.*, U.user_name
+        FROM
+        CalendarEvent CE
+        JOIN
+        Users U ON U.user_id = CE.user_id
+        JOIN
+        Department D ON D.department_id = CE.department_id
+        WHERE
+        CE.department_id = #{departmentId}
+        AND
+        CE.cal_event_date BETWEEN #{startDate} AND #{endDate}
+        AND
+        CE.calendar_id IS NULL;
+    </select>
+
+    <!--    팀 일정 하나 조회 -->
+    <select id="findOneTeamCalEvent" resultType="allMyTeamCalendarEventDto">
+        SELECT
+        CE.cal_event_id AS calEventId,
+        CE.cal_event_date AS calEventDate,
+        CE.cal_event_title AS calEventTitle,
+        CE.cal_event_description AS calEventDescription,
+        CE.cal_event_createAt AS calEventCreateAt,
+        CE.cal_event_updateAt AS calEventUpdateAt,
+        CE.color_index_id AS colorIndexId,
+        CE.user_id AS userId,
+        CE.team_calendar_id AS teamCalendarId,
+        CE.department_id AS departmentId,
+        CE.update_by AS updateBy, <!-- update_by 필드를 새로 추가한 부분 -->
+        D.department_name AS departmentName,
+        U.user_name AS userName <!-- U.user_name 별칭이 올바른 위치에 위치하도록 수정 -->
+        FROM
+        CalendarEvent CE
+        JOIN
+        Users U ON U.user_id = CE.user_id
+        JOIN
+        Department D ON D.department_id = CE.department_id
+        WHERE
+        CE.cal_event_id = #{calEventId}
+        AND
+        CE.calendar_id IS NULL;
+    </select>
+
+    <!-- 본인이 속한 팀 캘린더 모든 일정 리스트 조회 -->
+    <select id="getMyAllTeamCalendarEvents" resultType="allMyTeamCalendarEventDto">
+        SELECT *
+        FROM
+        CalendarEvent
+        WHERE
+        department_id = #{departmentId}
+        AND calendar_id IS NULL;
+    </select>
+
+
+<!--업데이트 사항 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+
+<!--    개인 캘린더 회원가입 시 부여하기 -->
+    <insert id="saveNewMyCalendar">
+        INSERT INTO Calendar
+        (userId)
+        VALUES
+        (#{userId})
+    </insert>
+
+<!--    개인 캘린더 아이디 찾기-->
+    <select id="findMyCalendarId" resultType="int">
+        SELECT
+        calendar_id
+        FROM
+        Calendar
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 팀 캘린더 아이디 찾기 또는 삽입 -->
+<!--    <insert id="findAndSaveTeamCalendarId" parameterType="String">-->
+<!--        INSERT IGNORE INTO TeamCalendar (department_id)-->
+<!--        VALUES (#{departmentId})-->
+<!--    </insert>-->
+
+    <select id="findMyTeamCalendarId"  resultType="java.lang.Integer">
+        SELECT
+        team_calendar_id
+        FROM
+        TeamCalendar
+        WHERE department_id = #{departmentId}
+    </select>
+
+
+    <!--    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-->
+
+    <!-- 팀 캘린더에 캘린더 공유 일정 저장 -->
+    <insert id="insertTeamCalendarEvent" parameterType="allMyTeamCalendarEventDto">
+        INSERT INTO CalendarEvent (
+        cal_event_date,
+        cal_event_title,
+        cal_event_description,
+        user_id,
+        department_id,
+        team_calendar_id
+        <if test="colorIndexId != null">
+            ,color_index_id
+        </if>
+        <if test="noticeId != null">
+            ,notice_id
+        </if>
+        )
+        VALUES (
+        #{calEventDate},
+        #{calEventTitle},
+        #{calEventDescription},
+        #{userId},
+        #{departmentId},
+        #{teamCalendarId}
+        <if test="colorIndexId != null">
+            ,#{colorIndexId}
+        </if>
+        <if test="noticeId != null">
+            ,#{noticeId}
+        </if>
+        );
+
+    </insert>
+
+    <!-- 팀 공유 일정 수정 -->
+    <update id="updateTeamCalEvent" parameterType="allMyTeamCalendarEventDto">
+        UPDATE CalendarEvent
+        SET
+        cal_event_date = #{calEventDate},
+        cal_event_title = #{calEventTitle},
+        cal_event_description = #{calEventDescription},
+        cal_event_updateAt = #{calEventUpdateAt},
+        team_calendar_id = #{teamCalendarId},
+        update_by = #{updateBy}, <!-- 수정자 추가 -->
+        color_index_id = #{colorIndexId}
+        WHERE cal_event_id = #{calEventId}
+    </update>
+
+    <select id="getDepartmentIdByUserId" parameterType="String">
+        SELECT
+        department_id AS departmentId
+        FROM UserTeamCalendar
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

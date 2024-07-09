@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workflowManager.mapper.scheduleMapper.ColorIndexMapper">
+
+    <select id="getAllColorIndexes" resultType="com.workflowManager.entity.schedule.ColorIndex">
+        SELECT * FROM ColorIndex;
+    </select>
+
+    <!-- Insert query for saving color -->
+    <insert id="saveColorIndex" parameterType="ColorIndex">
+        INSERT INTO ColorIndex (color_name, color_code)
+        VALUES (#{colorName}, #{colorCode});
+    </insert>
+
+</mapper>
+
+        <!-- Select query to retrieve color ID by color name -->
+        <!--    <select id="getColorIdByName" >-->
+        <!--        SELECT color_index_id-->
+        <!--        FROM colorIndex-->
+        <!--        WHERE color_name = #{colorName}-->
+        <!--    </select>-->

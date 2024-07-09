@@ -1,0 +1,67 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.10'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.workflowManager'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    //스프링 종합 선물 세트
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    //롬북
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    //JUNIT
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    //MOCKITO
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.12.4'
+
+
+    //jsp 라이브러리 추가
+    implementation 'javax.servlet:jstl'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    //마리아 디비 라이브러리 추가
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.3.3'
+    //Spring JDBC 모듈
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    // 마이바티스 모듈
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+
+    // 입력값 검증 라이브러리 validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    //스프링 시큐리티 모듈
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //jackson : tostroing() -> json 형식으로 변환 가능
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.3'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.3'
+
+    // bcrypt 비밀번호 해싱
+    implementation 'de.svenkubiak:jBCrypt:0.4'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.28' // 최신 버전 확인
+    annotationProcessor 'org.projectlombok:lombok:1.18.28' // 최신 버전 확인
+}

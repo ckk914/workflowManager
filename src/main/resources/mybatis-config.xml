@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--    카멜케이스 변환 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.workflowManager.entity.board.Board" alias="board"/>
+        <typeAlias type="com.workflowManager.entity.User" alias="user"/>
+
+<!--        캘린더 dto -->
+        <typeAlias alias="calendarsDto" type="com.workflowManager.dto.schedule_dto.request.CalendarsDto"/>
+        <typeAlias alias="allMyCalendarEventDto" type="com.workflowManager.dto.schedule_dto.request.AllMyCalendarEventDto"/>
+        <typeAlias alias="allMyTeamCalendarEventDto" type="com.workflowManager.dto.schedule_dto.request.AllMyTeamCalendarEventDto"/>
+        <typeAlias alias="AllCalendarEvents" type="com.workflowManager.entity.schedule.CalendarEvent"/>
+
+<!--        투두리스트 dto -->
+        <typeAlias alias="allMyTodoListDto" type="com.workflowManager.dto.schedule_dto.request.AllMyTodoListDto"/>
+        <typeAlias alias="allMyTeamTodoListDto" type="com.workflowManager.dto.schedule_dto.request.AllMyTeamTodoListDto"/>
+        <typeAlias alias="todoList" type="com.workflowManager.entity.schedule.TodoList"/>
+        <typeAlias alias="teamTodoList" type="com.workflowManager.entity.schedule.TeamTodoList"/>
+
+
+<!--        익명게시판 dto-->
+        <typeAlias type="com.workflowManager.entity.board.Reply" alias="reply"/>
+        <typeAlias type="com.workflowManager.entity.board.SubReply" alias="subReply"/>
+
+<!--        유저 dto-->
+        <typeAlias type="com.workflowManager.entity.User" alias="user"/>
+
+<!--교통상황 dto-->
+        <typeAlias type="com.workflowManager.entity.trrafic.Traffic" alias="traffic"/>
+        <typeAlias type="com.workflowManager.entity.trrafic.StationView" alias="stationView"/>
+
+
+
+
+<!--        calendar entity class -->
+        <typeAlias type="com.workflowManager.entity.schedule.ColorIndex" alias="colorIndex"/>
+        <typeAlias type="com.workflowManager.entity.schedule.Calendar" alias="calendar"/>
+        <typeAlias type="com.workflowManager.entity.schedule.TeamCalendar" alias="teamCalendar"/>
+        <typeAlias type="com.workflowManager.entity.schedule.CalendarEvent" alias="calendarEvent"/>
+        <typeAlias type="com.workflowManager.entity.schedule.TodoList" alias="todoList"/>
+        <typeAlias type="com.workflowManager.entity.schedule.TeamTodoList" alias="teamTodoList"/>
+        <typeAlias type="com.workflowManager.entity.schedule.TodoListEvent" alias="todoListEvent"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="mappers/BoardMapper.xml"/>
+
+        <mapper resource="mappers/UserMapper.xml"/>
+
+<!--        schedule mapper-->
+        <mapper resource="mappers/scheduleMapper/CalendarMapper.xml"/>
+        <mapper resource="mappers/scheduleMapper/ColorIndexMapper.xml"/>
+        <mapper resource="mappers/scheduleMapper/TodoListMapper.xml"/>
+
+
+        <mapper resource="mappers/ReplyMapper.xml"/>
+        <!--        <mapper resource="mappers/PersonMapper.xml"/>-->
+
+        <mapper resource="mappers/UserMapper.xml"/>
+
+        <mapper resource="mappers/trafficMapper.xml"/>
+        <mapper resource="mappers/trafficViewMapper.xml"/>
+
+
+        <!--        <mapper resource="mappers/MemoMapper.xml"/>-->
+
+        <mapper resource="mappers/LunchMateBoardMapper.xml"/>
+    </mappers>
+</configuration>
+
