@@ -1,6 +1,7 @@
 # 🌊 WORKWAVE README
+![0](https://github.com/user-attachments/assets/0aade090-4dbd-47db-a079-46164e84371c)
 
-![KakaoTalk_20240709_092415642](https://github.com/binwoojoo/jpastudy202406/assets/161430796/e527fa4c-c489-47a1-ad89-59f987ecd97d)
+
 
 <!-- - 배포 URL : https://ohmycode-readme.netlify.app
 - Test ID : readme@test.com
